@@ -27,9 +27,30 @@ alpha = 1
 for i in range(len(class_data)):
     class_data[i]["class"] = i
 
-
-
 print(class_data)
+
+# Convert pandas frames to numpy training and test data sets
+train_x = np.concatenate([df.iloc[0:30,:-1].to_numpy() for df in class_data])
+#train_x = np.concatenate([df.iloc[20:,:-1].to_numpy() for df in class_data])
+
+train_y_labels = np.concatenate([df.iloc[0:30,-1].to_numpy() for df in class_data])
+#train_y_labels = np.concatenate([df.iloc[20:,-1].to_numpy() for df in class_data])
+
+train_y = np.zeros((train_y_labels.shape[0], n_classes))
+for i, label in np.ndenumerate(train_y_labels):
+    train_y[i][round(label)] = 1
+
+test_x = np.concatenate([df.iloc[30:, :-1].to_numpy() for df in class_data])
+#test_x = np.concatenate([df.iloc[0:20,:-1].to_numpy() for df in class_data])
+
+test_y_labels = np.concatenate([df.iloc[30:,-1].to_numpy() for df in class_data])
+#test_y_labels = np.concatenate([df.iloc[0:20,-1].to_numpy() for df in class_data])
+
+test_y = np.zeros((test_y_labels.shape[0],n_classes))
+for i, label in np.ndenumerate(test_y_labels):
+    test_y[i][round(label)] = 1
+
+
 
 
 """
