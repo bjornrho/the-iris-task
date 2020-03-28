@@ -51,7 +51,8 @@ for i, label in np.ndenumerate(test_y_labels):
     test_y[i][round(label)] = 1
 
 
-
+# Initialize the total matrix containing the weight matrix and bias vectot
+W = np.zeros((n_classes, n_attributes+1))
 
 """
 def predict()
